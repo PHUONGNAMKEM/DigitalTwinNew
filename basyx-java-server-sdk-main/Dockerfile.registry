@@ -1,0 +1,30 @@
+# Multi-stage Dockerfile for BaSyx AAS Registry
+# Build from root to include all parent POMs
+
+# Stage 1: Build with Maven
+FROM maven:3.9-eclipse-temurin-17 AS build
+
+WORKDIR /workspace
+
+# Copy entire project for parent POM resolution
+COPY . .
+
+# Build entire project first to resolve all dependencies
+RUN mvn clean install -DskipTests
+
+# Stage 2: Runtime
+FROM eclipse-temurin:17-jre
+
+WORKDIR /app
+
+# Copy the executable JAR created by Spring Boot Maven Plugin
+COPY --from=build /workspace/basyx.aasregistry/basyx.aasregistry-service-release-log-mongodb/target/basyx.aasregistry-service-release-log-mongodb-*.jar app.jar
+
+# Expose port
+EXPOSE 8080
+
+# Set Spring profiles
+ENV spring.profiles.active=logEvents,mongoDbStorage
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]

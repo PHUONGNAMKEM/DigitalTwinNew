@@ -1,0 +1,686 @@
+{
+  "templates": {
+    "computer": {
+      "name": "Computer",
+      "icon": "💻",
+      "description": "Máy tính, máy trạm làm việc",
+      "assetType": "Computer/Workstation",
+      "nameplate": [
+        {
+          "idShort": "ManufacturerName",
+          "label": "Nhà sản xuất",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Dell Technologies, HP, Lenovo",
+          "tooltip": "Tên hãng sản xuất thiết bị",
+          "examples": ["Dell Technologies", "HP Inc.", "Lenovo", "Apple", "ASUS"]
+        },
+        {
+          "idShort": "DeviceName",
+          "label": "Tên thiết bị",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Dell Precision 5820",
+          "tooltip": "Tên model hoặc tên gọi của thiết bị"
+        },
+        {
+          "idShort": "SerialNumber",
+          "label": "Số serial",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: SN-123456789",
+          "tooltip": "Số serial/mã định danh duy nhất của thiết bị"
+        },
+        {
+          "idShort": "Location",
+          "label": "Vị trí",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Workshop Floor 1",
+          "tooltip": "Vị trí vật lý của thiết bị"
+        },
+        {
+          "idShort": "YearOfConstruction",
+          "label": "Năm sản xuất",
+          "valueType": "xs:integer",
+          "required": false,
+          "placeholder": "VD: 2024",
+          "tooltip": "Năm sản xuất hoặc lắp đặt thiết bị"
+        }
+      ],
+      "technicalData": [
+        {
+          "idShort": "ProcessorName",
+          "label": "Tên CPU",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: Intel Core i7-12700K",
+          "tooltip": "Tên model của bộ xử lý"
+        },
+        {
+          "idShort": "ProcessorCount",
+          "label": "Số lõi CPU",
+          "valueType": "xs:integer",
+          "required": false,
+          "placeholder": "VD: 8",
+          "tooltip": "Số lượng lõi CPU"
+        },
+        {
+          "idShort": "TotalMemoryGB",
+          "label": "Dung lượng RAM (GB)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 32",
+          "tooltip": "Tổng dung lượng RAM tính bằng GB"
+        },
+        {
+          "idShort": "DiskSize",
+          "label": "Dung lượng ổ đĩa (GB)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 512",
+          "tooltip": "Tổng dung lượng ổ cứng tính bằng GB"
+        },
+        {
+          "idShort": "OSVersion",
+          "label": "Hệ điều hành",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: Windows 11 Pro",
+          "tooltip": "Tên và phiên bản hệ điều hành"
+        }
+      ],
+      "operationalData": [
+        {
+          "idShort": "CPUUsage",
+          "label": "Sử dụng CPU (%)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Phần trăm CPU đang sử dụng"
+        },
+        {
+          "idShort": "MemoryUsage",
+          "label": "Sử dụng RAM (%)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Phần trăm RAM đang sử dụng"
+        },
+        {
+          "idShort": "DiskUsage",
+          "label": "Sử dụng Disk (%)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Phần trăm ổ đĩa đang sử dụng"
+        },
+        {
+          "idShort": "NetworkSent",
+          "label": "Mạng gửi (KB/s)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Tốc độ gửi dữ liệu mạng"
+        },
+        {
+          "idShort": "NetworkReceived",
+          "label": "Mạng nhận (KB/s)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Tốc độ nhận dữ liệu mạng"
+        },
+        {
+          "idShort": "Timestamp",
+          "label": "Thời gian cập nhật",
+          "valueType": "xs:string",
+          "category": "PARAMETER",
+          "tooltip": "Thời điểm cập nhật dữ liệu lần cuối"
+        }
+      ]
+    },
+    "medical_device": {
+      "name": "Medical Device",
+      "icon": "🏥",
+      "description": "Thiết bị y tế (máy MRI, CT, X-quang...)",
+      "assetType": "Medical/Equipment",
+      "nameplate": [
+        {
+          "idShort": "ManufacturerName",
+          "label": "Nhà sản xuất",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Siemens Healthineers, GE Healthcare",
+          "tooltip": "Tên hãng sản xuất thiết bị y tế",
+          "examples": ["Siemens Healthineers", "GE Healthcare", "Philips Healthcare"]
+        },
+        {
+          "idShort": "DeviceName",
+          "label": "Tên thiết bị",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: MRI Scanner Magnetom Vida",
+          "tooltip": "Tên model thiết bị y tế"
+        },
+        {
+          "idShort": "SerialNumber",
+          "label": "Số serial",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: MED-2024-001",
+          "tooltip": "Số serial thiết bị (bắt buộc cho thiết bị y tế)"
+        },
+        {
+          "idShort": "Location",
+          "label": "Vị trí",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Radiology Department - Room 201",
+          "tooltip": "Vị trí trong bệnh viện"
+        },
+        {
+          "idShort": "CertificationNumber",
+          "label": "Số chứng nhận FDA/CE",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: FDA-K123456",
+          "tooltip": "Số chứng nhận của cơ quan quản lý"
+        }
+      ],
+      "technicalData": [
+        {
+          "idShort": "DeviceClass",
+          "label": "Phân loại thiết bị",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Class II, Class III",
+          "tooltip": "Phân loại theo FDA (Class I, II, III)"
+        },
+        {
+          "idShort": "PowerRating",
+          "label": "Công suất (W)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 5000",
+          "tooltip": "Công suất tiêu thụ điện"
+        },
+        {
+          "idShort": "OperatingVoltage",
+          "label": "Điện áp (V)",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: 220V/50Hz",
+          "tooltip": "Điện áp vận hành"
+        },
+        {
+          "idShort": "Dimensions",
+          "label": "Kích thước (cm)",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: 200x150x180",
+          "tooltip": "Kích thước thiết bị (DxRxC)"
+        },
+        {
+          "idShort": "MaintenanceInterval",
+          "label": "Chu kỳ bảo trì (tháng)",
+          "valueType": "xs:integer",
+          "required": false,
+          "placeholder": "VD: 6",
+          "tooltip": "Số tháng giữa các lần bảo trì"
+        }
+      ],
+      "operationalData": [
+        {
+          "idShort": "OperationalStatus",
+          "label": "Trạng thái hoạt động",
+          "valueType": "xs:string",
+          "category": "VARIABLE",
+          "tooltip": "Idle, Running, Maintenance, Error"
+        },
+        {
+          "idShort": "TotalScans",
+          "label": "Tổng số lần chụp",
+          "valueType": "xs:integer",
+          "category": "VARIABLE",
+          "tooltip": "Số lượng lần sử dụng tích lũy"
+        },
+        {
+          "idShort": "LastMaintenanceDate",
+          "label": "Bảo trì lần cuối",
+          "valueType": "xs:string",
+          "category": "PARAMETER",
+          "tooltip": "Ngày bảo trì gần nhất"
+        },
+        {
+          "idShort": "NextMaintenanceDate",
+          "label": "Bảo trì tiếp theo",
+          "valueType": "xs:string",
+          "category": "PARAMETER",
+          "tooltip": "Ngày bảo trì kế hoạch"
+        },
+        {
+          "idShort": "ErrorCode",
+          "label": "Mã lỗi",
+          "valueType": "xs:string",
+          "category": "VARIABLE",
+          "tooltip": "Mã lỗi hiện tại (nếu có)"
+        },
+        {
+          "idShort": "Timestamp",
+          "label": "Thời gian cập nhật",
+          "valueType": "xs:string",
+          "category": "PARAMETER",
+          "tooltip": "Thời điểm cập nhật dữ liệu"
+        }
+      ]
+    },
+    "construction_equipment": {
+      "name": "Construction Equipment",
+      "icon": "🏗️",
+      "description": "Thiết bị xây dựng (máy xúc, cần cẩu...)",
+      "assetType": "Construction/Equipment",
+      "nameplate": [
+        {
+          "idShort": "ManufacturerName",
+          "label": "Nhà sản xuất",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Caterpillar, Komatsu, Volvo",
+          "tooltip": "Tên hãng sản xuất thiết bị xây dựng",
+          "examples": ["Caterpillar", "Komatsu", "Volvo", "Hitachi"]
+        },
+        {
+          "idShort": "DeviceName",
+          "label": "Tên thiết bị",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Excavator CAT 320D",
+          "tooltip": "Tên model thiết bị"
+        },
+        {
+          "idShort": "SerialNumber",
+          "label": "Số serial/VIN",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: CAT0320DXJCB12345",
+          "tooltip": "Số serial hoặc VIN của thiết bị"
+        },
+        {
+          "idShort": "Location",
+          "label": "Vị trí/Công trường",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Site A - North Zone",
+          "tooltip": "Vị trí hiện tại hoặc công trường"
+        },
+        {
+          "idShort": "LicensePlate",
+          "label": "Biển số (nếu có)",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: 29A-12345",
+          "tooltip": "Biển số đăng ký xe"
+        }
+      ],
+      "technicalData": [
+        {
+          "idShort": "EquipmentType",
+          "label": "Loại thiết bị",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Excavator, Crane, Bulldozer",
+          "tooltip": "Phân loại thiết bị xây dựng"
+        },
+        {
+          "idShort": "EngineModel",
+          "label": "Model động cơ",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: CAT C7.1 ACERT",
+          "tooltip": "Model động cơ"
+        },
+        {
+          "idShort": "EnginePower",
+          "label": "Công suất động cơ (HP)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 158",
+          "tooltip": "Công suất động cơ tính bằng mã lực"
+        },
+        {
+          "idShort": "OperatingWeight",
+          "label": "Trọng lượng vận hành (kg)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 20500",
+          "tooltip": "Trọng lượng máy khi vận hành"
+        },
+        {
+          "idShort": "MaxDiggingDepth",
+          "label": "Độ sâu đào tối đa (m)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 6.5",
+          "tooltip": "Độ sâu đào tối đa (cho máy xúc)"
+        }
+      ],
+      "operationalData": [
+        {
+          "idShort": "EngineStatus",
+          "label": "Trạng thái động cơ",
+          "valueType": "xs:string",
+          "category": "VARIABLE",
+          "tooltip": "Off, Idle, Running"
+        },
+        {
+          "idShort": "FuelLevel",
+          "label": "Mức nhiên liệu (%)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Phần trăm nhiên liệu còn lại"
+        },
+        {
+          "idShort": "EngineHours",
+          "label": "Giờ chạy máy (h)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Tổng số giờ động cơ đã chạy"
+        },
+        {
+          "idShort": "EngineTemperature",
+          "label": "Nhiệt độ động cơ (°C)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Nhiệt độ động cơ hiện tại"
+        },
+        {
+          "idShort": "GPSLocation",
+          "label": "Vị trí GPS",
+          "valueType": "xs:string",
+          "category": "VARIABLE",
+          "tooltip": "Tọa độ GPS (lat,long)"
+        },
+        {
+          "idShort": "Timestamp",
+          "label": "Thời gian cập nhật",
+          "valueType": "xs:string",
+          "category": "PARAMETER",
+          "tooltip": "Thời điểm cập nhật dữ liệu"
+        }
+      ]
+    },
+    "3d_printer": {
+      "name": "3D Printer",
+      "icon": "🖨️",
+      "description": "Máy in 3D công nghiệp",
+      "assetType": "Manufacturing/3DPrinter",
+      "nameplate": [
+        {
+          "idShort": "ManufacturerName",
+          "label": "Nhà sản xuất",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Stratasys, Ultimaker, Formlabs",
+          "tooltip": "Tên hãng sản xuất máy in 3D",
+          "examples": ["Stratasys", "Ultimaker", "Formlabs", "Prusa"]
+        },
+        {
+          "idShort": "DeviceName",
+          "label": "Tên thiết bị",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Ultimaker S5 Pro Bundle",
+          "tooltip": "Tên model máy in 3D"
+        },
+        {
+          "idShort": "SerialNumber",
+          "label": "Số serial",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: ULT-S5-2024-001",
+          "tooltip": "Số serial máy in"
+        },
+        {
+          "idShort": "Location",
+          "label": "Vị trí",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Manufacturing Lab - Station 3",
+          "tooltip": "Vị trí lắp đặt máy in"
+        }
+      ],
+      "technicalData": [
+        {
+          "idShort": "PrintTechnology",
+          "label": "Công nghệ in",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: FDM, SLA, SLS",
+          "tooltip": "Công nghệ in 3D (FDM, SLA, SLS...)"
+        },
+        {
+          "idShort": "BuildVolume",
+          "label": "Khối in (mm)",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: 330x240x300",
+          "tooltip": "Kích thước vùng in tối đa"
+        },
+        {
+          "idShort": "LayerResolution",
+          "label": "Độ phân giải lớp (mm)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 0.05",
+          "tooltip": "Độ dày lớp in tối thiểu"
+        },
+        {
+          "idShort": "MaterialType",
+          "label": "Loại vật liệu",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: PLA, ABS, Resin",
+          "tooltip": "Loại vật liệu in hỗ trợ"
+        },
+        {
+          "idShort": "NozzleSize",
+          "label": "Kích thước nozzle (mm)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 0.4",
+          "tooltip": "Đường kính vòi phun"
+        }
+      ],
+      "operationalData": [
+        {
+          "idShort": "PrintStatus",
+          "label": "Trạng thái in",
+          "valueType": "xs:string",
+          "category": "VARIABLE",
+          "tooltip": "Idle, Printing, Paused, Error"
+        },
+        {
+          "idShort": "CurrentJob",
+          "label": "Công việc hiện tại",
+          "valueType": "xs:string",
+          "category": "VARIABLE",
+          "tooltip": "Tên file đang in"
+        },
+        {
+          "idShort": "PrintProgress",
+          "label": "Tiến độ in (%)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Phần trăm hoàn thành công việc in"
+        },
+        {
+          "idShort": "NozzleTemperature",
+          "label": "Nhiệt độ nozzle (°C)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Nhiệt độ vòi phun hiện tại"
+        },
+        {
+          "idShort": "BedTemperature",
+          "label": "Nhiệt độ bed (°C)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Nhiệt độ bàn in hiện tại"
+        },
+        {
+          "idShort": "MaterialRemaining",
+          "label": "Vật liệu còn lại (g)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Khối lượng vật liệu còn lại"
+        },
+        {
+          "idShort": "TotalPrintTime",
+          "label": "Tổng thời gian in (h)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Tổng số giờ đã in"
+        },
+        {
+          "idShort": "Timestamp",
+          "label": "Thời gian cập nhật",
+          "valueType": "xs:string",
+          "category": "PARAMETER",
+          "tooltip": "Thời điểm cập nhật dữ liệu"
+        }
+      ]
+    },
+    "iot_sensor": {
+      "name": "IoT Sensor",
+      "icon": "📡",
+      "description": "Cảm biến IoT (nhiệt độ, độ ẩm, áp suất...)",
+      "assetType": "IoT/Sensor",
+      "nameplate": [
+        {
+          "idShort": "ManufacturerName",
+          "label": "Nhà sản xuất",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Bosch, Texas Instruments, Honeywell",
+          "tooltip": "Tên hãng sản xuất cảm biến",
+          "examples": ["Bosch", "Texas Instruments", "Honeywell", "STMicroelectronics"]
+        },
+        {
+          "idShort": "DeviceName",
+          "label": "Tên thiết bị",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: BME680 Environmental Sensor",
+          "tooltip": "Tên model cảm biến"
+        },
+        {
+          "idShort": "SerialNumber",
+          "label": "Số serial/MAC",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: 00:1A:2B:3C:4D:5E",
+          "tooltip": "Số serial hoặc địa chỉ MAC"
+        },
+        {
+          "idShort": "Location",
+          "label": "Vị trí lắp đặt",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Warehouse - Zone A",
+          "tooltip": "Vị trí lắp đặt cảm biến"
+        }
+      ],
+      "technicalData": [
+        {
+          "idShort": "SensorType",
+          "label": "Loại cảm biến",
+          "valueType": "xs:string",
+          "required": true,
+          "placeholder": "VD: Temperature, Humidity, Pressure",
+          "tooltip": "Loại cảm biến (nhiệt độ, độ ẩm...)"
+        },
+        {
+          "idShort": "MeasurementRange",
+          "label": "Dải đo",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: -40°C to 85°C",
+          "tooltip": "Dải giá trị đo được"
+        },
+        {
+          "idShort": "Accuracy",
+          "label": "Độ chính xác",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: ±0.5°C",
+          "tooltip": "Độ chính xác của cảm biến"
+        },
+        {
+          "idShort": "SamplingRate",
+          "label": "Tần số lấy mẫu (Hz)",
+          "valueType": "xs:double",
+          "required": false,
+          "placeholder": "VD: 1",
+          "tooltip": "Số lần đo trên giây"
+        },
+        {
+          "idShort": "CommunicationProtocol",
+          "label": "Giao thức truyền thông",
+          "valueType": "xs:string",
+          "required": false,
+          "placeholder": "VD: MQTT, HTTP, CoAP",
+          "tooltip": "Giao thức kết nối (MQTT, HTTP...)"
+        }
+      ],
+      "operationalData": [
+        {
+          "idShort": "SensorValue",
+          "label": "Giá trị đo",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Giá trị hiện tại của cảm biến"
+        },
+        {
+          "idShort": "BatteryLevel",
+          "label": "Mức pin (%)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Phần trăm pin còn lại"
+        },
+        {
+          "idShort": "SignalStrength",
+          "label": "Cường độ tín hiệu (dBm)",
+          "valueType": "xs:double",
+          "category": "VARIABLE",
+          "tooltip": "Độ mạnh tín hiệu kết nối"
+        },
+        {
+          "idShort": "LastCalibrationDate",
+          "label": "Hiệu chuẩn lần cuối",
+          "valueType": "xs:string",
+          "category": "PARAMETER",
+          "tooltip": "Ngày hiệu chuẩn gần nhất"
+        },
+        {
+          "idShort": "ErrorCount",
+          "label": "Số lỗi",
+          "valueType": "xs:integer",
+          "category": "VARIABLE",
+          "tooltip": "Số lần đọc lỗi"
+        },
+        {
+          "idShort": "Timestamp",
+          "label": "Thời gian cập nhật",
+          "valueType": "xs:string",
+          "category": "PARAMETER",
+          "tooltip": "Thời điểm cập nhật dữ liệu"
+        }
+      ]
+    },
+    "custom": {
+      "name": "Custom Device",
+      "icon": "⚙️",
+      "description": "Tự định nghĩa thiết bị",
+      "assetType": "Custom",
+      "nameplate": [],
+      "technicalData": [],
+      "operationalData": []
+    }
+  }
+}

@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Manager - Advanced Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .stat-card .number {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .stat-card.online .number {
+            color: #10b981;
+        }
+
+        .stat-card.offline .number {
+            color: #ef4444;
+        }
+
+        .stat-card.total .number {
+            color: #667eea;
+        }
+
+        .actions {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: #10b981;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .devices-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .devices-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .search-box {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            width: 300px;
+        }
+
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .device-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .device-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .device-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .device-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .device-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .device-id {
+            color: #999;
+            font-size: 0.85em;
+            font-family: monospace;
+        }
+
+        .status-badge {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-badge.online {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-badge.online::before {
+            background: #10b981;
+        }
+
+        .status-badge.offline {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-badge.offline::before {
+            background: #ef4444;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 3% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 25px 30px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .close {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .template-selector {
+            margin-bottom: 30px;
+        }
+
+        .template-selector h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .template-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .template-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .template-card.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .template-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .template-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .template-desc {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group label .required {
+            color: #ef4444;
+        }
+
+        .form-group .tooltip-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 18px;
+            font-size: 12px;
+            cursor: help;
+            margin-left: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            width: max-content;
+            max-width: 300px;
+            z-index: 100;
+            display: none;
+            margin-bottom: 5px;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 20px;
+            border: 6px solid transparent;
+            border-top-color: #333;
+        }
+
+        .tooltip-icon:hover + .tooltip {
+            display: block;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 2px solid #eee;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .modal-footer button {
+            padding: 12px 30px;
+        }
+
+        .add-field-btn {
+            background: #10b981;
+            margin-top: 15px;
+        }
+
+        .field-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .field-row input {
+            flex: 1;
+        }
+
+        .field-row button {
+            padding: 8px 15px;
+            background: #ef4444;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .info-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #f0f4ff;
+            color: #667eea;
+            border-radius: 5px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 Device Manager - Multi-Domain Dashboard</h1>
+            <p class="subtitle">Quản lý thiết bị cho nhiều lĩnh vực: Máy tính, Y tế, Xây dựng, IoT, 3D Printing...</p>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card total">
+                <h3>Tổng số thiết bị</h3>
+                <div class="number" id="totalDevices">0</div>
+                <p>Devices</p>
+            </div>
+            <div class="stat-card online">
+                <h3>Đang hoạt động</h3>
+                <div class="number" id="onlineDevices">0</div>
+                <p>Online</p>
+            </div>
+            <div class="stat-card offline">
+                <h3>Ngắt kết nối</h3>
+                <div class="number" id="offlineDevices">0</div>
+                <p>Offline</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button onclick="openAddDeviceModal()">
+                ➕ Thêm thiết bị mới
+            </button>
+            <button onclick="refreshDevices()">
+                🔄 Làm mới
+            </button>
+        </div>
+
+        <div class="devices-container">
+            <div class="devices-header">
+                <h2>Danh sách thiết bị</h2>
+                <input type="text" class="search-box" id="searchBox" placeholder="🔍 Tìm kiếm thiết bị..." onkeyup="filterDevices()">
+            </div>
+            <div id="devicesGrid" class="devices-grid">
+                <div class="loading">Đang tải dữ liệu...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal thêm thiết bị -->
+    <div id="addDeviceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thêm thiết bị mới</h2>
+                <span class="close" onclick="closeAddDeviceModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <!-- Template Selector -->
+                <div class="template-selector">
+                    <h3>1️⃣ Chọn loại thiết bị <span class="info-badge">Bước 1</span></h3>
+                    <div class="template-grid" id="templateGrid">
+                        <!-- Templates will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Device Form -->
+                <form id="deviceForm">
+                    <input type="hidden" id="selectedTemplate" value="custom">
+                    
+                    <!-- Basic Info -->
+                    <div class="form-section">
+                        <h3>2️⃣ Thông tin cơ bản <span class="info-badge">Bước 2</span></h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Device ID <span class="required">*</span>
+                                    <span class="tooltip-icon">?</span>
+                                    <span class="tooltip">Mã định danh duy nhất cho thiết bị (VD: PC001, MED001, CRANE001)</span>
+                                </label>
+                                <input type="text" id="deviceId" required placeholder="VD: DEVICE001">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nameplate Data -->
+                    <div class="form-section" id="nameplateSection">
+                        <h3>3️⃣ Thông tin nhận dạng (Nameplate) <span class="info-badge">Bước 3</span></h3>
+                        <div class="form-grid" id="nameplateFields">
+                            <!-- Fields will be generated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Technical Data -->
+                    <div class="form-section" id="technicalSection">
+                        <h3>4️⃣ Thông số kỹ thuật (Technical Data) <span class="info-badge">Bước 4 - Tùy chọn</span></h3>
+                        <div class="form-grid" id="technicalFields">
+                            <!-- Fields will be generated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Custom Fields -->
+                    <div class="form-section">
+                        <h3>5️⃣ Trường tùy chỉnh <span class="info-badge">Tùy chọn</span></h3>
+                        <div id="customFields">
+                            <!-- Custom fields will be added here -->
+                        </div>
+                        <button type="button" class="add-field-btn" onclick="addCustomField()">
+                            ➕ Thêm trường tùy chỉnh
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="closeAddDeviceModal()">Hủy</button>
+                <button type="button" class="btn-success" onclick="submitDevice()">Tạo thiết bị</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allDevices = [];
+        let templates = {};
+        let currentTemplate = 'custom';
+        const API_URL = 'http://localhost:5000/api';
+
+        // Load templates and devices on page load
+        window.onload = function() {
+            loadTemplates();
+            loadDevices();
+            setInterval(loadDevices, 5000);
+        };
+
+        async function loadTemplates() {
+            try {
+                const response = await fetch(`${API_URL}/templates`);
+                const data = await response.json();
+                templates = data.templates || {};
+                renderTemplateSelector();
+            } catch (error) {
+                console.error('Error loading templates:', error);
+            }
+        }
+
+        function renderTemplateSelector() {
+            const grid = document.getElementById('templateGrid');
+            grid.innerHTML = '';
+
+            for (const [key, template] of Object.entries(templates)) {
+                const card = document.createElement('div');
+                card.className = 'template-card';
+                if (key === 'custom') card.classList.add('selected');
+                card.onclick = () => selectTemplate(key);
+                card.innerHTML = `
+                    <div class="template-icon">${template.icon}</div>
+                    <div class="template-name">${template.name}</div>
+                    <div class="template-desc">${template.description}</div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        function selectTemplate(templateKey) {
+            currentTemplate = templateKey;
+            document.getElementById('selectedTemplate').value = templateKey;
+            
+            // Update UI
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+
+            // Render form fields based on template
+            renderFormFields();
+        }
+
+        function renderFormFields() {
+            const template = templates[currentTemplate];
+            if (!template) return;
+
+            // Render Nameplate fields
+            renderFields('nameplateFields', template.nameplate || []);
+            
+            // Render Technical fields
+            renderFields('technicalFields', template.technicalData || []);
+        }
+
+        function renderFields(containerId, fields) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            fields.forEach(field => {
+                const div = document.createElement('div');
+                div.className = 'form-group';
+                
+                const requiredMark = field.required ? '<span class="required">*</span>' : '';
+                const tooltip = field.tooltip ? `
+                    <span class="tooltip-icon">?</span>
+                    <span class="tooltip">${field.tooltip}</span>
+                ` : '';
+
+                let inputHTML = '';
+                if (field.examples && field.examples.length > 0) {
+                    inputHTML = `<input type="text" list="${field.idShort}_list" 
+                        name="${field.idShort}" 
+                        ${field.required ? 'required' : ''} 
+                        placeholder="${field.placeholder || ''}">
+                        <datalist id="${field.idShort}_list">
+                            ${field.examples.map(ex => `<option value="${ex}">`).join('')}
+                        </datalist>`;
+                } else {
+                    const inputType = field.valueType === 'xs:integer' || field.valueType === 'xs:double' ? 'number' : 'text';
+                    const step = field.valueType === 'xs:double' ? 'step="0.01"' : '';
+                    inputHTML = `<input type="${inputType}" ${step} 
+                        name="${field.idShort}" 
+                        ${field.required ? 'required' : ''} 
+                        placeholder="${field.placeholder || ''}">`;
+                }
+
+                div.innerHTML = `
+                    <label>${field.label} ${requiredMark} ${tooltip}</label>
+                    ${inputHTML}
+                `;
+                
+                container.appendChild(div);
+            });
+        }
+
+        function addCustomField() {
+            const container = document.getElementById('customFields');
+            const row = document.createElement('div');
+            row.className = 'field-row';
+            row.innerHTML = `
+                <input type="text" placeholder="Tên trường" class="custom-field-name">
+                <input type="text" placeholder="Giá trị" class="custom-field-value">
+                <button type="button" onclick="this.parentElement.remove()">Xóa</button>
+            `;
+            container.appendChild(row);
+        }
+
+        function openAddDeviceModal() {
+            document.getElementById('addDeviceModal').style.display = 'block';
+            renderFormFields();
+        }
+
+        function closeAddDeviceModal() {
+            document.getElementById('addDeviceModal').style.display = 'none';
+            document.getElementById('deviceForm').reset();
+            document.getElementById('customFields').innerHTML = '';
+        }
+
+        async function submitDevice() {
+            const deviceId = document.getElementById('deviceId').value;
+            if (!deviceId) {
+                alert('Vui lòng nhập Device ID');
+                return;
+            }
+
+            const template = templates[currentTemplate];
+            
+            // Collect nameplate data
+            const nameplateData = {};
+            document.querySelectorAll('#nameplateFields input, #nameplateFields select').forEach(input => {
+                if (input.value) {
+                    nameplateData[input.name] = input.value;
+                }
+            });
+
+            // Collect technical data
+            const technicalData = {};
+            document.querySelectorAll('#technicalFields input, #technicalFields select').forEach(input => {
+                if (input.value) {
+                    technicalData[input.name] = input.value;
+                }
+            });
+
+            // Collect custom fields
+            document.querySelectorAll('.field-row').forEach(row => {
+                const name = row.querySelector('.custom-field-name').value;
+                const value = row.querySelector('.custom-field-value').value;
+                if (name && value) {
+                    nameplateData[name] = value;
+                }
+            });
+
+            const deviceData = {
+                deviceId: deviceId,
+                template: currentTemplate,
+                assetType: template.assetType || 'Unknown',
+                nameplate: nameplateData,
+                technicalData: technicalData,
+                operationalData: {
+                    Timestamp: new Date().toISOString()
+                }
+            };
+            try {
+                const response = await fetch(`${API_URL}/devices`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(deviceData)
+                });
+
+                if (response.ok) {
+                    alert('✅ Thêm thiết bị thành công!');
+                    closeAddDeviceModal();
+                    loadDevices();
+                } else {
+                    const error = await response.json();
+                    alert('❌ Lỗi: ' + error.error);
+                }
+            } catch (error) {
+                alert('❌ Không thể thêm thiết bị: ' + error.message);
+            }
+        }
+
+        async function loadDevices() {
+            try {
+                const response = await fetch(`${API_URL}/devices`);
+                const data = await response.json();
+                allDevices = data.devices || [];
+                updateStats();
+                displayDevices(allDevices);
+            } catch (error) {
+                console.error('Error loading devices:', error);
+            }
+        }
+
+        function updateStats() {
+            const total = allDevices.length;
+            const online = allDevices.filter(d => d.status === 'online').length;
+            const offline = allDevices.filter(d => d.status === 'offline').length;
+
+            document.getElementById('totalDevices').textContent = total;
+            document.getElementById('onlineDevices').textContent = online;
+            document.getElementById('offlineDevices').textContent = offline;
+        }
+
+        function displayDevices(devices) {
+            const grid = document.getElementById('devicesGrid');
+            
+            if (devices.length === 0) {
+                grid.innerHTML = `
+                    <div class="loading">
+                        <h3>Chưa có thiết bị nào</h3>
+                        <p>Thêm thiết bị mới để bắt đầu giám sát</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = devices.map(device => `
+                <div class="device-card">
+                    <div class="device-header">
+                        <div>
+                            <div class="device-name">${device.name}</div>
+                            <div class="device-id">${device.id}</div>
+                        </div>
+                        <span class="status-badge ${device.status}">${device.status}</span>
+                    </div>
+                    <div style="margin: 15px 0;">
+                        <div style="padding: 8px 0; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between;">
+                            <span style="color: #666;">Nhà sản xuất:</span>
+                            <span style="font-weight: bold;">${device.manufacturer}</span>
+                        </div>
+                        <div style="padding: 8px 0; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between;">
+                            <span style="color: #666;">Vị trí:</span>
+                            <span style="font-weight: bold;">${device.location}</span>
+                        </div>
+                        <div style="padding: 8px 0; display: flex; justify-content: space-between;">
+                            <span style="color: #666;">Cập nhật:</span>
+                            <span style="font-weight: bold;">${formatTimestamp(device.lastUpdate)}</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button style="flex: 1; padding: 10px; font-size: 0.9em;" onclick="window.open('http://localhost:3000', '_blank')">Chi tiết</button>
+                        <button style="flex: 1; padding: 10px; font-size: 0.9em; background: #ef4444;" onclick="deleteDevice('${device.id}')">Xóa</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatTimestamp(timestamp) {
+            if (!timestamp) return 'N/A';
+            try {
+                return new Date(timestamp).toLocaleString('vi-VN');
+            } catch {
+                return timestamp;
+            }
+        }
+
+        function filterDevices() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const filtered = allDevices.filter(device => 
+                device.id.toLowerCase().includes(searchTerm) ||
+                device.name.toLowerCase().includes(searchTerm) ||
+                device.manufacturer.toLowerCase().includes(searchTerm) ||
+                device.location.toLowerCase().includes(searchTerm)
+            );
+            displayDevices(filtered);
+        }
+
+        function refreshDevices() {
+            loadDevices();
+        }
+
+        async function deleteDevice(deviceId) {
+            if (!confirm(`Bạn có chắc chắn muốn xóa thiết bị ${deviceId}?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/devices/${deviceId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('✅ Đã xóa thiết bị!');
+                    loadDevices();
+                } else {
+                    alert('❌ Không thể xóa thiết bị');
+                }
+            } catch (error) {
+                alert('❌ Lỗi: ' + error.message);
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('addDeviceModal');
+            if (event.target == modal) {
+                closeAddDeviceModal();
+            }
+        }
+    </script>
+</body>
+</html>

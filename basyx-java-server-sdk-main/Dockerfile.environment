@@ -1,0 +1,14 @@
+# Multi-stage Dockerfile for BaSyx AAS Environment (All-in-One)
+# Tích hợp: AAS Repository + Submodel Repository + ConceptDescription Repository
+
+FROM maven:3.9-eclipse-temurin-17 AS build
+WORKDIR /workspace
+COPY . .
+# Build toàn bộ project
+RUN mvn clean install -DskipTests
+
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /workspace/basyx.aasenvironment/basyx.aasenvironment.component/target/basyx.aasenvironment.component-*-exec.jar app.jar
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,0 +1,21 @@
+# Digital Twin System - Python Dependencies
+# Cài đặt: pip install -r requirements.txt
+
+# HTTP Client for REST API
+requests>=2.31.0
+
+# System and Process monitoring
+psutil>=5.9.0
+
+# MQTT Client
+paho-mqtt>=1.6.1
+
+# Web Framework
+Flask>=3.0.0
+Flask-CORS>=4.0.0
+
+# Optional: MongoDB client (nếu muốn kết nối trực tiếp)
+# pymongo>=4.6.0
+
+# Environment variables from .env file
+python-dotenv>=1.0.0

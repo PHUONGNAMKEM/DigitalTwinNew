@@ -1,0 +1,12 @@
+[
+  {
+    "datasource": "mqtt-datasource",
+    "transformers": [],
+    "datasinks": [
+      {
+        "uniqueId": "aas-sink"
+      }
+    ],
+    "trigger": "event"
+  }
+]

@@ -1,0 +1,53 @@
+services:
+  # 0. Nginx Proxy - Giải quyết CORS issues
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    ports:
+      - "${NGINX_PORT:-8888}:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - basyx-environment
+
+  # 1. MQTT Broker (Sử dụng bản 1.6 cho nhẹ và dễ kết nối)
+  mqtt-broker:
+    image: eclipse-mosquitto:1.6
+    container_name: mqtt-broker
+    ports:
+      - "${MQTT_PORT:-1883}:1883"
+      - "${MQTT_WS_PORT:-9001}:9001"
+
+  # 2. BaSyx Environment - All-in-One (Registry + AAS Repository + Submodel Repository + ConceptDescription)
+  # Image tự build từ basyx-java-server-sdk-main/Dockerfile.environment
+  # Build: docker build -t basyx-environment -f basyx-java-server-sdk-main/Dockerfile.environment basyx-java-server-sdk-main/
+  basyx-environment:
+    image: basyx-environment:latest
+    container_name: basyx-environment
+    ports:
+      - "${BASYX_SERVER_PORT:-8081}:8081"
+    environment:
+      - SERVER_PORT=8081
+      - SPRING_DATA_MONGODB_URI=${MONGODB_URI}
+      - SPRING_DATA_MONGODB_DATABASE=${MONGODB_DB_NAME:-DigitalTwinDB}
+      - SPRING_PROFILES_ACTIVE=logEvents,mongoDbStorage
+      - BASYX_CORS_ALLOWED-ORIGINS=*
+      - BASYX_CORS_ALLOWED-METHODS=GET,POST,PATCH,DELETE,PUT,OPTIONS,HEAD
+      - BASYX_CORS_ALLOWED-HEADERS=*
+
+  # 3. Web UI - Giao diện để bạn soi bản sao số
+  # Sử dụng pre-built image từ Docker Hub (thư mục source rỗng)
+  aas-gui:
+    image: eclipsebasyx/aas-gui:v2-250417
+    container_name: aas-gui
+    ports:
+      - "${AAS_GUI_PORT:-3001}:3000"
+    volumes:
+      - ./aas-gui-config.json:/usr/src/app/dist/aas-gui-config.json:ro
+    environment:
+      - AAS_REPO_PATH=http://localhost:${BASYX_SERVER_PORT:-8081}/shells
+      - SUBMODEL_REPO_PATH=http://localhost:${BASYX_SERVER_PORT:-8081}/submodels
+      - CD_REPO_PATH=http://localhost:${BASYX_SERVER_PORT:-8081}/concept-descriptions
+      - PRIMARY_COLOR=${AAS_GUI_PRIMARY_COLOR:-#00A651}
+    depends_on:
+      - basyx-environment

@@ -1,0 +1,5 @@
+{
+  "uniqueId": "aas-sink",
+  "serverUrl": "http://aas-server:4001/aas-server",
+  "registryUrl": "http://aas-registry:4000/registry"
+}

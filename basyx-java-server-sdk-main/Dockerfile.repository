@@ -1,0 +1,27 @@
+# Multi-stage Dockerfile for BaSyx AAS Repository
+# Build from root to include all parent POMs
+
+# Stage 1: Build with Maven
+FROM maven:3.9-eclipse-temurin-17 AS build
+
+WORKDIR /workspace
+
+# Copy entire project for parent POM resolution
+COPY . .
+
+# Build entire project first to resolve all dependencies
+RUN mvn clean install -DskipTests
+
+# Stage 2: Runtime
+FROM eclipse-temurin:17-jre
+
+WORKDIR /app
+
+# Copy the executable JAR with -exec classifier
+COPY --from=build /workspace/basyx.aasrepository/basyx.aasrepository.component/target/basyx.aasrepository.component-*-exec.jar app.jar
+
+# Expose port
+EXPOSE 8081
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
