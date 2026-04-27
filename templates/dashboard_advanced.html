@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,7 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin-bottom: 30px;
         }
 
@@ -53,7 +54,7 @@
             background: white;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s;
         }
@@ -91,7 +92,7 @@
             background: white;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
             display: flex;
             gap: 15px;
@@ -130,7 +131,7 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .devices-header {
@@ -168,7 +169,7 @@
 
         .device-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             border-color: #667eea;
         }
 
@@ -241,8 +242,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .loading {
@@ -260,7 +268,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             overflow-y: auto;
         }
 
@@ -271,7 +279,7 @@
             border-radius: 15px;
             width: 90%;
             max-width: 900px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-height: 90vh;
             display: flex;
             flex-direction: column;
@@ -450,7 +458,7 @@
             border-top-color: #333;
         }
 
-        .tooltip-icon:hover + .tooltip {
+        .tooltip-icon:hover+.tooltip {
             display: block;
         }
 
@@ -499,8 +507,291 @@
             font-size: 0.85em;
             margin-left: 10px;
         }
+
+        /* PC Monitor Panel */
+        .pc-monitor-panel {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .pc-monitor-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pc-monitor-header h2 {
+            margin: 0;
+            font-size: 1.3em;
+        }
+
+        .pc-monitor-body {
+            padding: 25px 30px;
+        }
+
+        .pc-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .pc-info-item {
+            padding: 10px 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .pc-info-item .label {
+            font-size: 0.8em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pc-info-item .value {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 4px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #f6f8fb 0%, #ffffff 100%);
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .metric-card h4 {
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .metric-value.cpu {
+            color: #667eea;
+        }
+
+        .metric-value.ram {
+            color: #f59e0b;
+        }
+
+        .metric-value.disk {
+            color: #10b981;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.8s ease, background 0.3s;
+        }
+
+        .progress-fill.cpu {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .progress-fill.ram {
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+        }
+
+        .progress-fill.disk {
+            background: linear-gradient(90deg, #10b981, #059669);
+        }
+
+        .metric-detail {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-pc-demo {
+            background: linear-gradient(135deg, #10b981, #059669);
+            font-size: 1.05em;
+            padding: 14px 25px;
+        }
+
+        .btn-pc-demo:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .pc-monitor-placeholder {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .pc-monitor-placeholder .icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .uptime-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #eff6ff;
+            color: #1e40af;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+
+        /* MQTT Panel */
+        .mqtt-panel {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .mqtt-header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mqtt-header h3 {
+            margin: 0;
+        }
+
+        .mqtt-body {
+            padding: 20px 25px;
+        }
+
+        .mqtt-status-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .mqtt-status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .mqtt-status-dot.connected {
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        .mqtt-status-dot.disconnected {
+            background: #ef4444;
+        }
+
+        .mqtt-sub-list {
+            margin-top: 15px;
+        }
+
+        .mqtt-sub-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .mqtt-sub-item .topic {
+            font-family: monospace;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .mqtt-sub-item .device {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .btn-mqtt {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .btn-mqtt:hover {
+            background: linear-gradient(135deg, #d97706, #b45309);
+        }
+
+        .btn-small {
+            padding: 6px 14px;
+            font-size: 0.85em;
+            border-radius: 6px;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .mqtt-empty {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -530,18 +821,200 @@
             <button onclick="openAddDeviceModal()">
                 ➕ Thêm thiết bị mới
             </button>
+            <button class="btn-pc-demo" onclick="registerPcMonitor()">
+                💻 Demo PC Monitor
+            </button>
             <button onclick="refreshDevices()">
                 🔄 Làm mới
             </button>
         </div>
 
+        <!-- PC Monitor Real-time Panel -->
+        <div class="pc-monitor-panel" id="pcMonitorPanel" style="display: none;">
+            <div class="pc-monitor-header">
+                <h2>💻 PC Monitor - Real-time</h2>
+                <div>
+                    <span class="live-indicator"><span class="live-dot"></span> LIVE</span>
+                    <span class="uptime-badge" id="pcUptime">--</span>
+                </div>
+            </div>
+            <div class="pc-monitor-body">
+                <!-- System Info -->
+                <div class="pc-info-grid" id="pcInfoGrid">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Real-time Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>🔲 CPU Usage <span id="cpuTimestamp" style="font-size: 0.7em; color: #999;"></span></h4>
+                        <div class="metric-value cpu" id="cpuValue">--%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill cpu" id="cpuBar" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-detail" id="cpuDetail">Đang tải...</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>📊 RAM Usage</h4>
+                        <div class="metric-value ram" id="ramValue">--%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ram" id="ramBar" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-detail" id="ramDetail">Đang tải...</div>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>💾 Disk Usage</h4>
+                        <div class="metric-value disk" id="diskValue">--%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill disk" id="diskBar" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-detail" id="diskDetail">Đang tải...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PC Monitor Placeholder (before register) -->
+        <div class="pc-monitor-panel" id="pcMonitorPlaceholder">
+            <div class="pc-monitor-body">
+                <div class="pc-monitor-placeholder">
+                    <div class="icon">💻</div>
+                    <h3>Demo PC Monitor</h3>
+                    <p>Nhấn nút <strong>"💻 Demo PC Monitor"</strong> ở trên để tự động tạo Digital Twin cho máy tính
+                        của bạn.</p>
+                    <p style="color: #667eea; margin-top: 10px;">Dữ liệu CPU, RAM, Disk sẽ được lấy trực tiếp từ máy
+                        tính thật!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MQTT Panel -->
+        <div class="mqtt-panel">
+            <div class="mqtt-header">
+                <h3>📡 MQTT Subscriber</h3>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <span id="mqttStatusBadge" style="font-size:0.85em;"><span
+                            class="mqtt-status-dot disconnected"></span> Disconnected</span>
+                </div>
+            </div>
+            <div class="mqtt-body">
+                <div class="mqtt-status-row">
+                    <span id="mqttBrokerInfo" style="color:#666;">Broker: --</span>
+                    <button class="btn-mqtt btn-small" id="mqttConnectBtn" onclick="toggleMqtt()">Kết nối MQTT</button>
+                    <button class="btn-small" style="background:#4b5563; color:white; border:none;"
+                        onclick="openMqttConnectionModal()">⚙️ Cài đặt</button>
+                    <button class="btn-small" onclick="openMqttConfigModal()">+ Thêm Topic</button>
+                </div>
+                <div class="mqtt-sub-list" id="mqttSubList">
+                    <div class="mqtt-empty">Chưa có subscription nào. Thêm topic để nhận dữ liệu từ MQTT.</div>
+                </div>
+            </div>
+        </div>
+
         <div class="devices-container">
             <div class="devices-header">
                 <h2>Danh sách thiết bị</h2>
-                <input type="text" class="search-box" id="searchBox" placeholder="🔍 Tìm kiếm thiết bị..." onkeyup="filterDevices()">
+                <input type="text" class="search-box" id="searchBox" placeholder="🔍 Tìm kiếm thiết bị..."
+                    onkeyup="filterDevices()">
             </div>
             <div id="devicesGrid" class="devices-grid">
                 <div class="loading">Đang tải dữ liệu...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cấu hình MQTT Broker Connection -->
+    <div id="mqttConnectionModal" class="modal">
+        <div class="modal-content" style="max-width: 35%;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #1f2937, #374151);">
+                <h2><span style="color: white">⚙️ Cài đặt MQTT Broker</span></h2>
+                <span class="close" onclick="closeMqttConnectionModal()" style="color: white">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <div class="form-grid" style="grid-template-columns: 1fr;">
+                        <div class="form-group">
+                            <label>Broker Host <span class="required">*</span></label>
+                            <input type="text" id="mqttBrokerHost" placeholder="VD: broker.hivemq.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Port <span class="required">*</span></label>
+                            <input type="number" id="mqttBrokerPort" placeholder="VD: 8884" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" id="mqttBrokerUsername" placeholder="Tùy chọn">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="mqttBrokerPassword"
+                                placeholder="Tùy chọn (để trống nếu không đổi)">
+                            <small style="color: #666; display: block; margin-top: 5px;"
+                                id="mqttPasswordStatus"></small>
+                        </div>
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="mqttUseTls" style="width: auto;"> Sử dụng TLS (SSL/wss)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="closeMqttConnectionModal()">Hủy</button>
+                <button type="button" class="btn-success" onclick="saveMqttConnectionConfig()">Lưu cài đặt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal cấu hình MQTT Subscription -->
+    <div id="mqttConfigModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                <h2 id="mqttSubModalTitle">📡 Cấu hình MQTT Subscription</h2>
+                <span class="close" onclick="closeMqttConfigModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-section">
+                    <h3>Thông tin kết nối</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Device ID <span class="required">*</span>
+                                <span class="tooltip-icon">?</span>
+                                <span class="tooltip">ID của thiết bị đã tạo trên dashboard. MQTT sẽ cập nhật dữ liệu
+                                    vào thiết bị này.</span>
+                            </label>
+                            <input type="text" id="mqttDeviceId" placeholder="VD: SENSOR-001" required>
+                        </div>
+                        <div class="form-group">
+                            <label>MQTT Topic <span class="required">*</span>
+                                <span class="tooltip-icon">?</span>
+                                <span class="tooltip">Topic MQTT mà thiết bị IoT publish dữ liệu vào. Hỗ trợ wildcard +
+                                    và #.</span>
+                            </label>
+                            <input type="text" id="mqttTopic" placeholder="VD: industry/sensors/SENSOR-001/telemetry">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <h3>Field Mapping <span class="info-badge">Tùy chọn</span></h3>
+                    <p style="color: #666; margin-bottom: 15px; font-size: 0.9em;">
+                        Nếu field trong MQTT khác tên với field trong AAS, cấu hình mapping tại đây.<br>
+                        VD: MQTT gửi "temperature" nhưng AAS cần "SensorValue".
+                    </p>
+                    <div id="fieldMappingRows">
+                        <!-- Dynamic rows -->
+                    </div>
+                    <button type="button" class="add-field-btn" onclick="addMappingRow()">
+                        ➕ Thêm mapping
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="closeMqttConfigModal()">Hủy</button>
+                <button type="button" class="btn-mqtt" onclick="saveMqttSubscription()">Lưu cấu hình</button>
             </div>
         </div>
     </div>
@@ -565,7 +1038,7 @@
                 <!-- Device Form -->
                 <form id="deviceForm">
                     <input type="hidden" id="selectedTemplate" value="custom">
-                    
+
                     <!-- Basic Info -->
                     <div class="form-section">
                         <h3>2️⃣ Thông tin cơ bản <span class="info-badge">Bước 2</span></h3>
@@ -573,7 +1046,8 @@
                             <div class="form-group">
                                 <label>Device ID <span class="required">*</span>
                                     <span class="tooltip-icon">?</span>
-                                    <span class="tooltip">Mã định danh duy nhất cho thiết bị (VD: PC001, MED001, CRANE001)</span>
+                                    <span class="tooltip">Mã định danh duy nhất cho thiết bị (VD: PC001, MED001,
+                                        CRANE001)</span>
                                 </label>
                                 <input type="text" id="deviceId" required placeholder="VD: DEVICE001">
                             </div>
@@ -590,7 +1064,8 @@
 
                     <!-- Technical Data -->
                     <div class="form-section" id="technicalSection">
-                        <h3>4️⃣ Thông số kỹ thuật (Technical Data) <span class="info-badge">Bước 4 - Tùy chọn</span></h3>
+                        <h3>4️⃣ Thông số kỹ thuật (Technical Data) <span class="info-badge">Bước 4 - Tùy chọn</span>
+                        </h3>
                         <div class="form-grid" id="technicalFields">
                             <!-- Fields will be generated dynamically -->
                         </div>
@@ -615,17 +1090,62 @@
         </div>
     </div>
 
+    <!-- Modal Confirm -->
+    <div id="confirmModal" class="modal" style="z-index: 10000;">
+        <div class="modal-content" style="max-width: 400px; margin: 15% auto; padding: 0;">
+            <div class="modal-body" style="text-align: center; padding: 40px 20px 30px;">
+                <div style="font-size: 3.5em; margin-bottom: 20px;">⚠️</div>
+                <h3 id="confirmMessage" style="margin-bottom: 30px; color: #333; font-size: 1.2em;">Bạn có chắc chắn?
+                </h3>
+                <div style="display: flex; justify-content: center; gap: 15px;">
+                    <button type="button" style="background: #e5e7eb; color: #333; min-width: 100px;"
+                        id="confirmCancelBtn">Hủy bỏ</button>
+                    <button type="button" class="btn-danger" style="min-width: 100px;" id="confirmOkBtn">Đồng ý</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        function showConfirm(message) {
+            return new Promise((resolve) => {
+                document.getElementById('confirmMessage').textContent = message;
+                document.getElementById('confirmModal').style.display = 'block';
+
+                const okBtn = document.getElementById('confirmOkBtn');
+                const cancelBtn = document.getElementById('confirmCancelBtn');
+
+                const cleanup = () => {
+                    document.getElementById('confirmModal').style.display = 'none';
+                    okBtn.removeEventListener('click', onOk);
+                    cancelBtn.removeEventListener('click', onCancel);
+                };
+
+                const onOk = () => { cleanup(); resolve(true); };
+                const onCancel = () => { cleanup(); resolve(false); };
+
+                okBtn.addEventListener('click', onOk);
+                cancelBtn.addEventListener('click', onCancel);
+            });
+        }
+
         let allDevices = [];
         let templates = {};
         let currentTemplate = 'custom';
+        let pcMonitorActive = false;
+        let pcMonitorInterval = null;
         const API_URL = 'http://localhost:5000/api';
 
         // Load templates and devices on page load
-        window.onload = function() {
+        window.onload = function () {
             loadTemplates();
             loadDevices();
             setInterval(loadDevices, 5000);
+            // Check if PC was already registered
+            checkExistingPcMonitor();
+            // Load MQTT status
+            refreshMqttStatus();
+            setInterval(refreshMqttStatus, 5000);
         };
 
         async function loadTemplates() {
@@ -660,7 +1180,7 @@
         function selectTemplate(templateKey) {
             currentTemplate = templateKey;
             document.getElementById('selectedTemplate').value = templateKey;
-            
+
             // Update UI
             document.querySelectorAll('.template-card').forEach(card => {
                 card.classList.remove('selected');
@@ -677,7 +1197,7 @@
 
             // Render Nameplate fields
             renderFields('nameplateFields', template.nameplate || []);
-            
+
             // Render Technical fields
             renderFields('technicalFields', template.technicalData || []);
         }
@@ -689,7 +1209,7 @@
             fields.forEach(field => {
                 const div = document.createElement('div');
                 div.className = 'form-group';
-                
+
                 const requiredMark = field.required ? '<span class="required">*</span>' : '';
                 const tooltip = field.tooltip ? `
                     <span class="tooltip-icon">?</span>
@@ -718,7 +1238,7 @@
                     <label>${field.label} ${requiredMark} ${tooltip}</label>
                     ${inputHTML}
                 `;
-                
+
                 container.appendChild(div);
             });
         }
@@ -749,12 +1269,12 @@
         async function submitDevice() {
             const deviceId = document.getElementById('deviceId').value;
             if (!deviceId) {
-                alert('Vui lòng nhập Device ID');
+                showNotification('Vui lòng nhập Device ID', 'error');
                 return;
             }
 
             const template = templates[currentTemplate];
-            
+
             // Collect nameplate data
             const nameplateData = {};
             document.querySelectorAll('#nameplateFields input, #nameplateFields select').forEach(input => {
@@ -793,20 +1313,20 @@
             try {
                 const response = await fetch(`${API_URL}/devices`, {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(deviceData)
                 });
 
                 if (response.ok) {
-                    alert('✅ Thêm thiết bị thành công!');
+                    showNotification('✅ Thêm thiết bị thành công!', 'success');
                     closeAddDeviceModal();
                     loadDevices();
                 } else {
                     const error = await response.json();
-                    alert('❌ Lỗi: ' + error.error);
+                    showNotification('❌ Lỗi: ' + error.error, 'error');
                 }
             } catch (error) {
-                alert('❌ Không thể thêm thiết bị: ' + error.message);
+                showNotification('❌ Không thể thêm thiết bị: ' + error.message, 'error');
             }
         }
 
@@ -834,7 +1354,7 @@
 
         function displayDevices(devices) {
             const grid = document.getElementById('devicesGrid');
-            
+
             if (devices.length === 0) {
                 grid.innerHTML = `
                     <div class="loading">
@@ -887,7 +1407,7 @@
 
         function filterDevices() {
             const searchTerm = document.getElementById('searchBox').value.toLowerCase();
-            const filtered = allDevices.filter(device => 
+            const filtered = allDevices.filter(device =>
                 device.id.toLowerCase().includes(searchTerm) ||
                 device.name.toLowerCase().includes(searchTerm) ||
                 device.manufacturer.toLowerCase().includes(searchTerm) ||
@@ -901,7 +1421,7 @@
         }
 
         async function deleteDevice(deviceId) {
-            if (!confirm(`Bạn có chắc chắn muốn xóa thiết bị ${deviceId}?`)) {
+            if (!(await showConfirm(`Bạn có chắc chắn muốn xóa thiết bị ${deviceId}?`))) {
                 return;
             }
 
@@ -911,23 +1431,494 @@
                 });
 
                 if (response.ok) {
-                    alert('✅ Đã xóa thiết bị!');
+                    showNotification('✅ Đã xóa thiết bị!', 'success');
                     loadDevices();
                 } else {
-                    alert('❌ Không thể xóa thiết bị');
+                    const errorData = await response.json().catch(() => ({}));
+                    showNotification('❌ Không thể xóa thiết bị: ' + (errorData.error || `HTTP ${response.status}`), 'error');
                 }
             } catch (error) {
-                alert('❌ Lỗi: ' + error.message);
+                showNotification('❌ Lỗi: ' + error.message, 'error');
+            }
+        }
+
+        // ==================== PC MONITOR FUNCTIONS ====================
+
+        async function checkExistingPcMonitor() {
+            try {
+                const response = await fetch(`${API_URL}/pc-monitor/status`);
+                if (response.ok) {
+                    const data = await response.json();
+                    // Check if AAS exists for this PC
+                    const deviceId = `PC_${data.system.hostname}`;
+                    const devicesResponse = await fetch(`${API_URL}/devices`);
+                    const devicesData = await devicesResponse.json();
+                    const pcDevice = (devicesData.devices || []).find(d => d.id === deviceId);
+                    if (pcDevice) {
+                        showPcMonitor(data);
+                    }
+                }
+            } catch (e) {
+                // Silently ignore
+            }
+        }
+
+        async function registerPcMonitor() {
+            const btn = event.currentTarget;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Đang đăng ký...';
+
+            try {
+                const response = await fetch(`${API_URL}/pc-monitor/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (data.alreadyExists) {
+                        showNotification('PC đã được đăng ký, đang cập nhật dữ liệu...', 'info');
+                    } else {
+                        showNotification('✅ Đã tạo Digital Twin cho PC thành công!', 'success');
+                    }
+                    showPcMonitor(data);
+                    loadDevices();
+                } else {
+                    showNotification('❌ Lỗi: ' + (data.error || 'Unknown error'), 'error');
+                }
+            } catch (error) {
+                showNotification('❌ Không thể kết nối server: ' + error.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '💻 Demo PC Monitor';
+            }
+        }
+
+        function showPcMonitor(data) {
+            // Hide placeholder, show monitor panel
+            document.getElementById('pcMonitorPlaceholder').style.display = 'none';
+            document.getElementById('pcMonitorPanel').style.display = 'block';
+
+            // Populate system info
+            const systemInfo = data.system;
+            const infoGrid = document.getElementById('pcInfoGrid');
+            infoGrid.innerHTML = `
+                <div class="pc-info-item">
+                    <div class="label">Hostname</div>
+                    <div class="value">${systemInfo.hostname}</div>
+                </div>
+                <div class="pc-info-item">
+                    <div class="label">Hệ điều hành</div>
+                    <div class="value">${systemInfo.os}</div>
+                </div>
+                <div class="pc-info-item">
+                    <div class="label">CPU</div>
+                    <div class="value">${systemInfo.processor.substring(0, 30)}...</div>
+                </div>
+                <div class="pc-info-item">
+                    <div class="label">CPU Cores</div>
+                    <div class="value">${systemInfo.cpu_cores}</div>
+                </div>
+                <div class="pc-info-item">
+                    <div class="label">RAM</div>
+                    <div class="value">${systemInfo.ram_total_gb} GB</div>
+                </div>
+                <div class="pc-info-item">
+                    <div class="label">Disk</div>
+                    <div class="value">${systemInfo.disk_total_gb} GB</div>
+                </div>
+            `;
+
+            // Update realtime stats
+            updatePcMetrics(data.realtime);
+
+            // Start auto-refresh if not already running
+            if (!pcMonitorActive) {
+                pcMonitorActive = true;
+                pcMonitorInterval = setInterval(refreshPcStats, 5000);
+            }
+        }
+
+        function updatePcMetrics(stats) {
+            // CPU
+            document.getElementById('cpuValue').textContent = stats.cpu_usage + '%';
+            document.getElementById('cpuBar').style.width = stats.cpu_usage + '%';
+            document.getElementById('cpuDetail').textContent = `${stats.cpu_usage}% sử dụng`;
+
+            // RAM
+            document.getElementById('ramValue').textContent = stats.ram_usage_percent + '%';
+            document.getElementById('ramBar').style.width = stats.ram_usage_percent + '%';
+            document.getElementById('ramDetail').textContent = `${stats.ram_used_gb} / ${stats.ram_total_gb} GB`;
+
+            // Disk
+            document.getElementById('diskValue').textContent = stats.disk_usage_percent + '%';
+            document.getElementById('diskBar').style.width = stats.disk_usage_percent + '%';
+            document.getElementById('diskDetail').textContent = `${stats.disk_used_gb} / ${stats.disk_total_gb} GB`;
+
+            // Uptime
+            document.getElementById('pcUptime').textContent = '⏱ ' + stats.uptime_display;
+
+            // Color change based on usage
+            colorizeMetric('cpuBar', stats.cpu_usage);
+            colorizeMetric('ramBar', stats.ram_usage_percent);
+        }
+
+        function colorizeMetric(barId, value) {
+            const bar = document.getElementById(barId);
+            if (value > 90) {
+                bar.style.background = 'linear-gradient(90deg, #ef4444, #dc2626)';
+            } else if (value > 70) {
+                bar.style.background = 'linear-gradient(90deg, #f59e0b, #ef4444)';
+            }
+        }
+
+        async function refreshPcStats() {
+            try {
+                // Get fresh stats from psutil
+                const response = await fetch(`${API_URL}/pc-monitor/status`);
+                if (response.ok) {
+                    const data = await response.json();
+                    updatePcMetrics(data.realtime);
+
+                    // Also update BaSyx with new values
+                    fetch(`${API_URL}/pc-monitor/update`, { method: 'POST' });
+                }
+            } catch (e) {
+                // Silently ignore poll failures
+            }
+        }
+
+        function showNotification(message, type) {
+            // Simple notification
+            const colors = { success: '#10b981', error: '#ef4444', info: '#667eea' };
+            const div = document.createElement('div');
+            div.style.cssText = `
+                position: fixed; top: 20px; right: 20px; z-index: 9999;
+                padding: 15px 25px; border-radius: 10px; color: white;
+                background: ${colors[type] || '#333'}; font-weight: bold;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+            `;
+            div.textContent = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 4000);
+        }
+
+        // ==================== MQTT FUNCTIONS ====================
+
+        async function refreshMqttStatus() {
+            try {
+                const response = await fetch(`${API_URL}/mqtt/status`);
+                if (!response.ok) return;
+                const status = await response.json();
+
+                // Update status badge
+                const badge = document.getElementById('mqttStatusBadge');
+                if (status.connected) {
+                    badge.innerHTML = '<span class="mqtt-status-dot connected"></span> Connected';
+                } else if (status.running) {
+                    badge.innerHTML = '<span class="mqtt-status-dot disconnected"></span> Connecting...';
+                } else {
+                    badge.innerHTML = '<span class="mqtt-status-dot disconnected"></span> Disconnected';
+                }
+
+                // Update broker info
+                document.getElementById('mqttBrokerInfo').textContent = `Broker: ${status.broker}`;
+
+                // Update connect button
+                const btn = document.getElementById('mqttConnectBtn');
+                if (status.running) {
+                    btn.textContent = 'Ngắt kết nối';
+                    btn.className = 'btn-danger btn-small';
+                } else {
+                    btn.textContent = 'Kết nối MQTT';
+                    btn.className = 'btn-mqtt btn-small';
+                }
+
+                // Update subscription list
+                window.mqttSubscriptionsData = status.subscriptions || {};
+                renderMqttSubscriptions(window.mqttSubscriptionsData);
+
+            } catch (e) {
+                // Silently ignore
+            }
+        }
+
+        function renderMqttSubscriptions(subs) {
+            const list = document.getElementById('mqttSubList');
+            const entries = Object.entries(subs);
+
+            if (entries.length === 0) {
+                list.innerHTML = '<div class="mqtt-empty">Chưa có subscription nào. Thêm topic để nhận dữ liệu từ MQTT.</div>';
+                return;
+            }
+
+            list.innerHTML = entries.map(([deviceId, config]) => {
+                let mappingsArray = [];
+                if (config.field_mapping && Object.keys(config.field_mapping).length > 0) {
+                    mappingsArray = Object.entries(config.field_mapping).map(([from, to]) =>
+                        `<span style="display:inline-block; background:#f3f4f6; padding:2px 6px; border-radius:4px; font-size:0.85em; margin:2px 4px 2px 0;">
+                            <b>${from}</b> ➔ <b>${to}</b>
+                        </span>`
+                    );
+                }
+                const mappingHtml = mappingsArray.length > 0
+                    ? `<div style="margin-top: 8px; color: #666; font-size: 0.9em;">
+                         <div style="font-weight:bold; margin-bottom:4px;">Field Mapping:</div>
+                         ${mappingsArray.join('')}
+                       </div>`
+                    : '';
+
+                return `
+                <div class="mqtt-sub-item">
+                    <div style="flex:1;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div class="device" style="font-weight:bold; color:#1f2937;">📦 ${deviceId}</div>
+                            <div class="topic" style="color:#d97706; background:#fef3c7; padding:2px 8px; border-radius:12px; font-size:0.85em;">${config.topic}</div>
+                        </div>
+                        ${mappingHtml}
+                    </div>
+                    <div style="display:flex; gap:5px; margin-left:15px; align-items:center;">
+                        <button class="btn-small" style="background:#3b82f6; color:white; border:none;" onclick="editMqttSub('${deviceId}')">✏️ Sửa</button>
+                        <button class="btn-danger btn-small" onclick="removeMqttSubscription('${deviceId}')">🗑️ Xóa</button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        async function toggleMqtt() {
+            try {
+                const statusResponse = await fetch(`${API_URL}/mqtt/status`);
+                const status = await statusResponse.json();
+
+                if (status.running) {
+                    await fetch(`${API_URL}/mqtt/stop`, { method: 'POST' });
+                    showNotification('MQTT đã ngắt kết nối', 'info');
+                } else {
+                    const result = await fetch(`${API_URL}/mqtt/start`, { method: 'POST' });
+                    const data = await result.json();
+                    if (data.status === 'started') {
+                        showNotification(`✅ MQTT đã kết nối: ${data.broker}`, 'success');
+                    } else if (data.status === 'error') {
+                        showNotification(`❌ MQTT lỗi: ${data.message}`, 'error');
+                    }
+                }
+
+                setTimeout(refreshMqttStatus, 1000);
+            } catch (e) {
+                showNotification('❌ Không thể kết nối MQTT: ' + e.message, 'error');
+            }
+        }
+
+        function openMqttConfigModal() {
+            document.getElementById('mqttConfigModal').style.display = 'block';
+            document.getElementById('mqttSubModalTitle').innerHTML = '📡 Thêm MQTT Subscription';
+            document.getElementById('mqttDeviceId').value = '';
+            document.getElementById('mqttDeviceId').readOnly = false;
+            document.getElementById('mqttTopic').value = '';
+            document.getElementById('fieldMappingRows').innerHTML = '';
+        }
+
+        function editMqttSub(deviceId) {
+            if (!window.mqttSubscriptionsData || !window.mqttSubscriptionsData[deviceId]) return;
+            const config = window.mqttSubscriptionsData[deviceId];
+
+            document.getElementById('mqttConfigModal').style.display = 'block';
+            document.getElementById('mqttSubModalTitle').innerHTML = '✏️ Cập nhật MQTT Subscription';
+            document.getElementById('mqttDeviceId').value = deviceId;
+            document.getElementById('mqttDeviceId').readOnly = true;
+            document.getElementById('mqttTopic').value = config.topic;
+
+            const container = document.getElementById('fieldMappingRows');
+            container.innerHTML = '';
+
+            if (config.field_mapping) {
+                Object.entries(config.field_mapping).forEach(([from, to]) => {
+                    addMappingRowWithValue(from, to);
+                });
+            }
+        }
+
+        function addMappingRowWithValue(fromVal = '', toVal = '') {
+            const container = document.getElementById('fieldMappingRows');
+            const row = document.createElement('div');
+            row.className = 'field-row';
+            row.innerHTML = `
+                <input type="text" placeholder="MQTT field (VD: temperature)" class="mqtt-field-from" value="${fromVal}">
+                <span style="padding: 8px; color: #666;">→</span>
+                <input type="text" placeholder="AAS field (VD: SensorValue)" class="mqtt-field-to" value="${toVal}">
+                <button type="button" onclick="this.parentElement.remove()" style="padding:8px 12px; background:#ef4444;">X</button>
+            `;
+            container.appendChild(row);
+        }
+
+        function addMappingRow() {
+            addMappingRowWithValue();
+        }
+
+        // ================= MQTT CONFIG CONNECTION UI ==================
+        async function openMqttConnectionModal() {
+            try {
+                const response = await fetch(`${API_URL}/mqtt/config`);
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('mqttBrokerHost').value = data.broker_host || '';
+                    document.getElementById('mqttBrokerPort').value = data.broker_port || 1883;
+                    document.getElementById('mqttBrokerUsername').value = data.mqtt_username || '';
+                    document.getElementById('mqttBrokerPassword').value = ''; // Always empty when loaded
+                    document.getElementById('mqttPasswordStatus').innerHTML = data.has_password ? '(Đã có mật khẩu được mã hóa lưu trước đó)' : '';
+                    document.getElementById('mqttUseTls').checked = data.use_tls;
+                }
+            } catch (e) {
+                console.error("Lỗi khi tải config:", e);
+            }
+            document.getElementById('mqttConnectionModal').style.display = 'block';
+        }
+
+        function closeMqttConnectionModal() {
+            document.getElementById('mqttConnectionModal').style.display = 'none';
+        }
+
+        async function saveMqttConnectionConfig() {
+            const host = document.getElementById('mqttBrokerHost').value.trim();
+            const port = document.getElementById('mqttBrokerPort').value;
+            const username = document.getElementById('mqttBrokerUsername').value.trim();
+            const password = document.getElementById('mqttBrokerPassword').value;
+            const useTls = document.getElementById('mqttUseTls').checked;
+
+            if (!host || !port) {
+                showNotification('Brokerr URL và Port là bắt buộc!', 'error');
+                return;
+            }
+
+            try {
+                const payload = {
+                    broker_host: host,
+                    broker_port: parseInt(port),
+                    mqtt_username: username,
+                    use_tls: useTls
+                };
+                if (password) {
+                    payload.mqtt_password = password;
+                }
+
+                const response = await fetch(`${API_URL}/mqtt/config`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    showNotification('✅ Đã lưu cấu hình và khởi động lại luồng kết nối', 'success');
+                    closeMqttConnectionModal();
+                    setTimeout(refreshMqttStatus, 1500); // Wait for thread restart to trigger status update
+                } else {
+                    const r = await response.json();
+                    showNotification('❌ Lỗi: ' + r.error, 'error');
+                }
+            } catch (e) {
+                showNotification('❌ Lỗi mất kết nối: ' + e.message, 'error');
+            }
+        }
+
+        function closeMqttConfigModal() {
+            document.getElementById('mqttConfigModal').style.display = 'none';
+        }
+
+
+
+        async function saveMqttSubscription() {
+            const deviceId = document.getElementById('mqttDeviceId').value.trim();
+            const topic = document.getElementById('mqttTopic').value.trim();
+
+            if (!deviceId || !topic) {
+                showNotification('Vui lòng nhập Device ID và MQTT Topic', 'error');
+                return;
+            }
+
+            // Collect field mappings
+            const fieldMapping = {};
+            document.querySelectorAll('#fieldMappingRows .field-row').forEach(row => {
+                const from = row.querySelector('.mqtt-field-from').value.trim();
+                const to = row.querySelector('.mqtt-field-to').value.trim();
+                if (from && to) {
+                    fieldMapping[from] = to;
+                }
+            });
+
+            try {
+                const response = await fetch(`${API_URL}/mqtt/subscriptions`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        device_id: deviceId,
+                        topic: topic,
+                        device_type: 'iot_sensor',
+                        field_mapping: fieldMapping
+                    })
+                });
+
+                if (response.ok) {
+                    showNotification(`✅ Đã thêm subscription: ${topic}`, 'success');
+                    closeMqttConfigModal();
+                    refreshMqttStatus();
+                } else {
+                    const err = await response.json();
+                    showNotification('❌ Lỗi: ' + err.error, 'error');
+                }
+            } catch (e) {
+                showNotification('❌ ' + e.message, 'error');
+            }
+        }
+
+        async function removeMqttSubscription(deviceId) {
+            if (!(await showConfirm(`Xóa subscription cho ${deviceId}?`))) return;
+
+            try {
+                const response = await fetch(`${API_URL}/mqtt/subscriptions/${deviceId}`, {
+                    method: 'DELETE'
+                });
+                if (response.ok) {
+                    showNotification(`Đã xóa subscription cho ${deviceId}`, 'info');
+                    refreshMqttStatus();
+                }
+            } catch (e) {
+                showNotification('❌ ' + e.message, 'error');
             }
         }
 
         // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('addDeviceModal');
-            if (event.target == modal) {
+        window.onclick = function (event) {
+            const addModal = document.getElementById('addDeviceModal');
+            const mqttModal = document.getElementById('mqttConfigModal');
+            const connModal = document.getElementById('mqttConnectionModal');
+            if (event.target == addModal) {
                 closeAddDeviceModal();
+            }
+            if (event.target == mqttModal) {
+                closeMqttConfigModal();
+            }
+            if (event.target == connModal) {
+                closeMqttConnectionModal();
             }
         }
     </script>
+
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
 </body>
+
 </html>

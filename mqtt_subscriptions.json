@@ -1,0 +1,11 @@
+{
+  "SENSOR-001": {
+    "topic": "smartlamp/sensor/data",
+    "device_type": "iot_sensor",
+    "field_mapping": {
+      "temperature": "SensorValue",
+      "battery": "BatteryLevel"
+    },
+    "created_at": "2026-04-27T03:57:13.610212Z"
+  }
+}

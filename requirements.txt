@@ -14,8 +14,8 @@ paho-mqtt>=1.6.1
 Flask>=3.0.0
 Flask-CORS>=4.0.0
 
-# Optional: MongoDB client (nếu muốn kết nối trực tiếp)
-# pymongo>=4.6.0
+# MongoDB client (cho verify_mongodb.py và IoT data logging)
+pymongo[srv]>=4.6.0
 
 # Environment variables from .env file
 python-dotenv>=1.0.0
